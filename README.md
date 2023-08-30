@@ -1,4 +1,15 @@
 # rainfall
+## Level 0
+
+**Exploit**: Buffer Overflow simple  
+**Commande**: `./level0 423`  
+**Explication**: Dans ce cas, l'exploit consiste à profiter d'une vulnérabilité de débordement de tampon. En passant l'argument 423 au programme level0, nous dépassons la taille du tampon prévu, ce qui nous permet d'écraser des données adjacentes en mémoire, y compris l'adresse du pointeur de retour. Cela nous permet de contrôler le flux d'exécution et d'obtenir le contenu du fichier .pass de l'utilisateur level1.
+
+**Sources**:
+- Aucune
+
+---
+
 ## Level 1
 
 **Exploit**: Buffer Overflow avec redirection de flux d'exécution  
