@@ -70,8 +70,6 @@
 - https://axcheron.github.io/exploit-101-format-strings/
 - https://owasp.org/www-community/attacks/Format_string_attack
 
-...
-
 ## Level 5
 
 **Exploit**: GOT Overwrite
