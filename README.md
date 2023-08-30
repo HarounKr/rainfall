@@ -86,7 +86,7 @@
 **Flag** : d3b7bf1025225bd715fa8ccb54ef06ca70b9125ac855aeab4878217177f41a31
 
 **Sources**:
-
+- Aucune
 ---
 
 ## Level 6
@@ -97,7 +97,7 @@
 **Flag** : f73dcb7a06f60e3ccc608990b0a046359d42a1a0489ffeefd0d9cb2d7c9cb82d
 
 **Sources**:
-
+- Aucune
 ---
 
 ## Level 7
@@ -141,6 +141,6 @@
 
 ---
 
-Ce write-up a été préparé avec soin par [hkrifa](lien_vers_votre_profil_GitHub).
+Ce write-up a été préparé avec soin par [HarounKr].
 
 **Disclaimer**: Ces exploits ont été conçus à des fins éducatives et d'apprentissage. Ne les utilisez pas à des fins malveillantes.
