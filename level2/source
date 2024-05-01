@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void p(void) {
+  unsigned int unaff_retaddr;  // Déclaration d'une variable pour stocker l'adresse de retour.
+  char local_50[76];           // Déclaration d'un buffer local de 76 caractères.
+
+  // Vide le buffer de sortie pour s'assurer que tout est écrit avant de continuer.
+  fflush(1);
+  gets(local_50);
+
+  // Masque et vérifie si l'adresse de retour est dans la plage spécifique (0xb0000000).
+  if ((unaff_retaddr & 0xb0000000) == 0xb0000000) {
+    printf("(%p)\n", (void*)unaff_retaddr);
+    exit(1);
+  }
+  puts(local_50);
+  strdup(local_50);
+}
+int main()
+
+{
+  p();
+  return 0;
+}

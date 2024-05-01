@@ -1,0 +1,29 @@
+void m(void *param_1,int param_2,char *param_3,int param_4,int param_5)
+
+{
+  puts("Nope");
+  return;
+}
+void n(void)
+
+{
+  system("/bin/cat /home/user/level7/.pass");
+  return;
+}
+
+int main(int argc, char **argv) {
+    char *buffer;
+    void (**fonctionPtr)(void);
+    
+    buffer = (char *)malloc(64);
+    // Alloue de la mémoire pour stocker un pointeur de fonction.
+    fonctionPtr = (void (**)(void))malloc(sizeof(void *));
+    // Assigne l'adresse de la fonction 'm' au pointeur de fonction alloué.
+    *fonctionPtr = m;
+    // Copie la chaîne passée comme premier argument dans le buffer.
+    strcpy(buffer, argv[1]);
+    // Appelle la fonction 'm' via le pointeur de fonction.
+    (**fonctionPtr)();
+
+    return 0;  
+}

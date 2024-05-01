@@ -1,0 +1,39 @@
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
+
+// Fonction principale.
+int main(int argc, char **argv) {
+  int nbr;
+  char *command;
+  uid_t user_id;
+  gid_t groupe_id;
+  
+  // Convertit le premier argument passé en entier.
+  nbr = atoi(argv[1]);
+  
+  // Vérifie si l'entier converti est égal à 423 (0x1a7 en hexadécimal).
+  if (nbr == 0x1a7) {
+    // Si vrai, duplique la chaîne "/bin/sh".
+    command = strdup("/bin/sh");
+    
+    // Récupère l'ID du groupe et de l'utilisateur effectif.
+    groupe_id = getegid();
+    user_id = geteuid();
+    
+    // Définit l'ID du groupe pour le processus.
+    setresgid(groupe_id, groupe_id, groupe_id);
+    
+    // Définit l'ID de l'utilisateur pour le processus.
+    setresuid(user_id, user_id, user_id);
+    
+    // Exécute le shell.
+    execv("/bin/sh", &command);
+  } else {
+    // Si l'argument n'est pas 423, affiche "No !" sur stderr.
+    fwrite("No !\n", 1, 5, stderr);
+  }
+  
+  return 0;
+}

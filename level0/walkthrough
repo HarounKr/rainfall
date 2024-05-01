@@ -1,0 +1,9 @@
+scp -P 22222 <level>@localhost:/home/user/<user>/<executable> .
+
+**Exploit**: Exploitation par bit setuid (s) (-rw(s)r-x---+)
+
+**Commande**: `./level0 423`
+**Explication**: Dans ce niveau, le proprietaire du fichier est level1, il dispose du bit setuid, le bit setuid permet d'executer un process au nom d'un autre utilisateur. Dans notre cas ca sera au nom de level1. On peut donc executer level0 avec les privileges de level1, ce qui nous fait passer en tant que niveau 1.
+
+**Ressources**:
+- https://fr.wikipedia.org/wiki/Setuid
