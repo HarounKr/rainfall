@@ -57,3 +57,4 @@ Si *auth + 32 est difference de 0, on peut obtenir notre shell
     login
     $ whoami
     level9
+    cat /home/user/level9/.pass
