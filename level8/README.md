@@ -1,8 +1,12 @@
 **Exploit**:
 
-**Commande**: `auth ; service; service; login`
+**Commande**:  
+```bash
+auth ; service; service; login
+```
 
-**Explication**: Le programme en question est une application en C qui utilise des pointeurs auth et service, initialement mis à NULL. Lors de son exécution, le programme affiche continuellement les adresses actuelles pointées par auth et service. Il comporte plusieurs commandes critiques permettant de manipuler ces adresses :
+**Explication**:  
+Le programme en question est une application en C qui utilise des pointeurs auth et service, initialement mis à NULL. Lors de son exécution, le programme affiche continuellement les adresses actuelles pointées par auth et service. Il comporte plusieurs commandes critiques permettant de manipuler ces adresses :
     auth <arg>: Alloue 4 octets pour auth et copie la chaîne fournie en argument à cette adresse.
     reset: Libère la mémoire allouée à auth.
     service <arg>: Alloue une chaîne pour service en dupliquant la chaîne fournie.

